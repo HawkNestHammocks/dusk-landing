@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;box-sizing:border-box}
+body{background:#0a0e24;font-family:'Inter',sans-serif}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);width:1400px}
+.tile{height:520px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:radial-gradient(120% 100% at 50% 0%,#1a2150,#0d1230 70%);border:1px solid rgba(217,178,95,.14);position:relative}
+.tile svg.mark{width:150px;height:150px;margin-bottom:26px}
+.wm{font-family:'Fraunces',serif;font-weight:600;font-size:64px;letter-spacing:8px;padding-left:8px;color:#f6f1e2;display:flex;align-items:center}
+.tag{font-family:'Oswald';font-size:15px;letter-spacing:7px;color:#d9b25f;margin-top:14px}
+.cap{position:absolute;top:22px;left:26px;font-family:'Oswald';font-size:13px;letter-spacing:3px;color:#8f93b5}
+.wm .moonO{width:52px;height:52px;margin:0 3px}
+</style></head><body>
+<div class="grid">
+
+  <!-- A: Crescent-G monogram -->
+  <div class="tile"><div class="cap">A · CRESCENT-G MONOGRAM</div>
+    <svg class="mark" viewBox="0 0 200 200">
+      <path d="M140 50 A72 72 0 1 0 140 150" fill="none" stroke="#d9b25f" stroke-width="26" stroke-linecap="round"/>
+      <path d="M140 100 L100 100" fill="none" stroke="#d9b25f" stroke-width="26" stroke-linecap="round"/>
+      <path d="M150 34 l3.2 8.4 9 .5 -6.8 5.6 2.4 8.7 -7.8-5.1 -7.8 5.1 2.4-8.7 -6.8-5.6 9-.5Z" fill="#f2eddd"/>
+    </svg>
+    <div class="wm">GLOAM</div><div class="tag">WIND-DOWN COCOA</div>
+  </div>
+
+  <!-- B: Twilight horizon -->
+  <div class="tile"><div class="cap">B · TWILIGHT HORIZON</div>
+    <svg class="mark" viewBox="0 0 200 200">
+      <circle cx="52" cy="66" r="2.6" fill="#f2eddd"/><circle cx="150" cy="56" r="2" fill="#f2eddd"/><circle cx="124" cy="42" r="1.7" fill="#f2eddd"/>
+      <path d="M62 122 A38 38 0 0 1 138 122 Z" fill="#d9b25f"/>
+      <line x1="28" y1="122" x2="172" y2="122" stroke="#d9b25f" stroke-width="4.5" stroke-linecap="round"/>
+      <line x1="84" y1="136" x2="116" y2="136" stroke="#d9b25f" stroke-width="3.4" opacity=".5" stroke-linecap="round"/>
+      <line x1="92" y1="148" x2="108" y2="148" stroke="#d9b25f" stroke-width="3.4" opacity=".28" stroke-linecap="round"/>
+    </svg>
+    <div class="wm">GLOAM</div><div class="tag">WIND-DOWN COCOA</div>
+  </div>
+
+  <!-- C: Moon inside the O -->
+  <div class="tile"><div class="cap">C · MOON IN THE WORDMARK</div>
+    <div class="wm" style="font-size:78px;letter-spacing:6px">GL<svg class="moonO" viewBox="0 0 60 60"><circle cx="30" cy="30" r="27" fill="none" stroke="#f6f1e2" stroke-width="6"/><path d="M38 16 a15 15 0 1 0 0 28 a11 11 0 1 1 0-28Z" fill="#d9b25f"/></svg>AM</div>
+    <div class="tag" style="margin-top:22px">WIND-DOWN COCOA</div>
+  </div>
+
+  <!-- D: Deco moon & rays -->
+  <div class="tile"><div class="cap">D · DECO MOONRISE</div>
+    <svg class="mark" viewBox="0 0 200 200">
+      <g stroke="#d9b25f" stroke-width="2.6" opacity=".5" stroke-linecap="round">
+        <line x1="100" y1="150" x2="100" y2="34"/>
+        <line x1="100" y1="150" x2="58" y2="52"/><line x1="100" y1="150" x2="142" y2="52"/>
+        <line x1="100" y1="150" x2="30" y2="88"/><line x1="100" y1="150" x2="170" y2="88"/>
+      </g>
+      <path d="M116 58 a36 36 0 1 0 0 68 a27 27 0 1 1 0-68Z" fill="#d9b25f"/>
+      <path d="M36 150 Q100 132 164 150" fill="none" stroke="#d9b25f" stroke-width="4" stroke-linecap="round"/>
+    </svg>
+    <div class="wm">GLOAM</div><div class="tag">WIND-DOWN COCOA</div>
+  </div>
+
+</div>
+</body></html>
