@@ -163,6 +163,38 @@
   .faq details[open] summary::after{content:"–"}
   .faq p{color:var(--cream-dim);font-size:15.5px;margin-top:12px;max-width:700px}
 
+  /* unique trust icons */
+  .trust-in div{display:flex;align-items:center;gap:9px}
+  .trust-in svg{width:22px;height:22px;stroke:var(--gold);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:0 0 22px}
+  /* staggered reveals */
+  .pg .reveal:nth-child(2),.bg2 .reveal:nth-child(2),.tg .reveal:nth-child(2){transition-delay:.08s}
+  .pg .reveal:nth-child(3),.bg2 .reveal:nth-child(3),.tg .reveal:nth-child(3){transition-delay:.16s}
+  .bg2 .reveal:nth-child(4),.tg .reveal:nth-child(4){transition-delay:.24s}
+  .bg2 .reveal:nth-child(5),.tg .reveal:nth-child(5){transition-delay:.32s}
+  .bg2 .reveal:nth-child(6),.tg .reveal:nth-child(6){transition-delay:.40s}
+  /* chart clarity */
+  .legend{display:flex;gap:18px;margin-bottom:16px;font-size:12.5px;color:var(--cream-dim)}
+  .legend .lg{display:flex;align-items:center;gap:7px}
+  .legend .lg::before{content:"";width:13px;height:13px;border-radius:3px}
+  .legend .lg.base::before{background:#3a4270}
+  .legend .lg.gold::before{background:var(--gold)}
+  .chartbody{display:flex;gap:12px}
+  .yaxis{display:flex;flex-direction:column;justify-content:space-between;height:220px;font-size:10.5px;color:var(--muted);text-align:right;padding-bottom:2px}
+  .barsarea{flex:1}
+  .xcap{text-align:center;font-size:11px;color:var(--muted);margin-top:6px;letter-spacing:.5px}
+  .caption{font-size:13.5px;color:var(--cream-dim);margin-top:16px;line-height:1.5}
+  /* benefit icons + expandable */
+  .bcard{cursor:pointer;transition:border-color .2s,background .2s}
+  .bcard:hover{border-color:var(--gold)}
+  .bcard .bi{width:48px;height:48px;border-radius:12px;background:rgba(217,178,95,.13);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+  .bcard .bi svg{width:26px;height:26px;stroke:var(--gold);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .bcard .bhead{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .bcard h3{font-size:21px}
+  .bcard .chev{color:var(--gold);font-size:22px;line-height:1;transition:transform .3s}
+  .bcard.open .chev{transform:rotate(45deg)}
+  .bcard .bmore{max-height:0;overflow:hidden;transition:max-height .35s ease,margin .35s ease,opacity .3s;opacity:0}
+  .bcard.open .bmore{max-height:140px;margin-top:12px;opacity:1}
+  .bcard .bmore p{font-size:14.5px;color:var(--muted);border-top:1px solid rgba(255,255,255,.08);padding-top:12px}
   footer{background:#080c20;padding:46px 0 32px;text-align:center;border-top:1px solid var(--line)}
   footer .brand{justify-content:center;margin-bottom:12px}
   footer p{color:var(--cream-dim);font-size:13px;max-width:580px;margin:0 auto 8px}
@@ -201,11 +233,11 @@
 
 <div class="trust">
   <div class="wrap trust-in">
-    <div><span class="d">☾</span> <b>No melatonin</b></div>
-    <div><span class="d">☾</span> <b>Caffeine-free</b></div>
-    <div><span class="d">☾</span> <b>Non habit-forming</b></div>
-    <div><span class="d">☾</span> <b>Clinically-dosed</b></div>
-    <div><span class="d">☾</span> <b>3rd-party tested</b></div>
+    <div><svg viewBox="0 0 24 24"><path d="M20.5 14.5A8 8 0 1 1 10 4a6.2 6.2 0 0 0 10.5 10.5Z"/><line x1="4" y1="20" x2="20" y2="4"/></svg> <b>No melatonin</b></div>
+    <div><svg viewBox="0 0 24 24"><path d="M4 8h13v4a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5Z"/><path d="M17 9h2a2 2 0 0 1 0 4h-2"/><line x1="4.5" y1="20.5" x2="20" y2="4"/></svg> <b>Caffeine-free</b></div>
+    <div><svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 9h.01M15 15h.01"/><line x1="4" y1="20" x2="20" y2="4"/></svg> <b>No added sugar</b></div>
+    <div><svg viewBox="0 0 24 24"><path d="M9 3h6M10 3v5.5L5.5 17a2 2 0 0 0 1.8 3h9.4a2 2 0 0 0 1.8-3L14 8.5V3"/><path d="M8 14h8"/></svg> <b>Clinically-dosed</b></div>
+    <div><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.2-3 8-7 10-4-2-7-5.8-7-10V6Z"/><path d="M9 12l2 2 4-4"/></svg> <b>3rd-party tested</b></div>
   </div>
 </div>
 
@@ -255,16 +287,24 @@
         </div>
       </div>
       <div class="chart reveal">
-        <h4>Deep sleep, night by night*</h4>
-        <div class="bars" id="bars">
-          <div class="bar base" data-h="34"></div><div class="bar base" data-h="38"></div>
-          <div class="bar" data-h="46"></div><div class="bar" data-h="52"></div>
-          <div class="bar" data-h="58"></div><div class="bar" data-h="63"></div>
-          <div class="bar" data-h="71"></div><div class="bar" data-h="78"></div>
-          <div class="bar" data-h="84"></div><div class="bar" data-h="92"></div>
+        <h4>Share of the night in deep sleep*</h4>
+        <div class="legend"><span class="lg base">Your usual baseline</span><span class="lg gold">On the DUSK ritual</span></div>
+        <div class="chartbody">
+          <div class="yaxis"><span>High</span><span>Med</span><span>Low</span></div>
+          <div class="barsarea">
+            <div class="bars" id="bars">
+              <div class="bar base" data-h="34"></div><div class="bar base" data-h="37"></div>
+              <div class="bar" data-h="45"></div><div class="bar" data-h="52"></div>
+              <div class="bar" data-h="58"></div><div class="bar" data-h="64"></div>
+              <div class="bar" data-h="70"></div><div class="bar" data-h="78"></div>
+              <div class="bar" data-h="84"></div><div class="bar" data-h="88"></div>
+            </div>
+            <div class="xlabels"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>10</span><span>12</span><span>14</span></div>
+            <div class="xcap">← NIGHTS OF THE RITUAL →</div>
+          </div>
         </div>
-        <div class="xlabels"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>10</span><span>12</span><span>14</span></div>
-        <div class="disc">*Illustrative of the improvement reported across the clinical studies behind DUSK's key ingredients and early-tester feedback. Individual results vary. Not a medical claim.</div>
+        <div class="caption">The first two nights (grey) are your normal starting point. As the wind-down ritual compounds over ~2 weeks, testers report steadily <b>more of each night spent in deep, restorative sleep</b> — then it levels off as the new routine sticks.</div>
+        <div class="disc">*Illustrative of the improvement reported across the clinical studies behind DUSK's key ingredients and early-tester feedback. Self-reported; individual results vary. Not a medical claim.</div>
       </div>
     </div>
   </div>
@@ -292,13 +332,44 @@
 <section class="blk ben">
   <div class="wrap">
     <div class="center reveal"><div class="kicker">What a nightly cup does</div><h2>Better nights, clearer mornings.</h2></div>
+    <p class="center" style="margin:-32px auto 34px;font-size:14px;color:var(--muted)">Tap any card to see how ↓</p>
     <div class="bg2">
-      <div class="bcard reveal"><div class="bi">☾</div><h3>Fall asleep faster</h3><p>Calming actives quiet the mind so you drift off instead of ruminating.</p></div>
-      <div class="bcard reveal"><div class="bi">☾</div><h3>Sleep deeper</h3><p>Magnesium + glycine support the deep, restorative stages of sleep.</p></div>
-      <div class="bcard reveal"><div class="bi">☾</div><h3>Wake up clear</h3><p>No hangover, no fog — you wake refreshed, not knocked-out.</p></div>
-      <div class="bcard reveal"><div class="bi">☾</div><h3>Calm a racing mind</h3><p>L-theanine &amp; ashwagandha take the edge off the day's stress.</p></div>
-      <div class="bcard reveal"><div class="bi">☾</div><h3>No dependency</h3><p>Zero melatonin. Nothing your body learns to rely on.</p></div>
-      <div class="bcard reveal"><div class="bi">☾</div><h3>A ritual you crave</h3><p>A warm, cozy cup replaces the doomscroll as your off-switch.</p></div>
+      <div class="bcard reveal" onclick="this.classList.toggle('open')">
+        <div class="bi"><svg viewBox="0 0 24 24"><path d="M20.5 14.5A8 8 0 1 1 10 4a6.2 6.2 0 0 0 10.5 10.5Z"/></svg></div>
+        <div class="bhead"><h3>Fall asleep faster</h3><span class="chev">+</span></div>
+        <p>Calming actives quiet the mind so you drift off instead of ruminating.</p>
+        <div class="bmore"><p>L-theanine and apigenin gently dial down mental chatter within ~30 minutes, shortening the time it takes to actually fall asleep — no knockout, just an easier landing.</p></div>
+      </div>
+      <div class="bcard reveal" onclick="this.classList.toggle('open')">
+        <div class="bi"><svg viewBox="0 0 24 24"><path d="M3 9c3.5 3.5 5.5-3.5 9 0s5.5 3.5 9 0"/><path d="M3 15c3.5 3.5 5.5-3.5 9 0s5.5 3.5 9 0"/></svg></div>
+        <div class="bhead"><h3>Sleep deeper</h3><span class="chev">+</span></div>
+        <p>Magnesium + glycine support the deep, restorative stages of sleep.</p>
+        <div class="bmore"><p>Glycine helps lower your core body temperature — a key trigger for deep sleep — while magnesium calms the nervous system, so more of your night is spent in restorative slow-wave sleep.</p></div>
+      </div>
+      <div class="bcard reveal" onclick="this.classList.toggle('open')">
+        <div class="bi"><svg viewBox="0 0 24 24"><path d="M4 18h16"/><path d="M7 18a5 5 0 0 1 10 0"/><line x1="12" y1="7" x2="12" y2="4"/><line x1="5" y1="10" x2="3.5" y2="8.5"/><line x1="19" y1="10" x2="20.5" y2="8.5"/></svg></div>
+        <div class="bhead"><h3>Wake up clear</h3><span class="chev">+</span></div>
+        <p>No hangover, no fog — you wake refreshed, not knocked-out.</p>
+        <div class="bmore"><p>Because there's no melatonin or sedative, nothing lingers into the morning. You get the benefit of deeper sleep without the groggy, drugged feeling other sleep aids leave behind.</p></div>
+      </div>
+      <div class="bcard reveal" onclick="this.classList.toggle('open')">
+        <div class="bi"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 5a7 7 0 0 1 7 7M12 19a7 7 0 0 1-7-7"/></svg></div>
+        <div class="bhead"><h3>Calm a racing mind</h3><span class="chev">+</span></div>
+        <p>L-theanine &amp; ashwagandha take the edge off the day's stress.</p>
+        <div class="bmore"><p>Ashwagandha (KSM-66®) helps lower cortisol — the stress hormone that keeps your brain "on" at night — so tomorrow's to-do list stops looping the moment your head hits the pillow.</p></div>
+      </div>
+      <div class="bcard reveal" onclick="this.classList.toggle('open')">
+        <div class="bi"><svg viewBox="0 0 24 24"><path d="M9.5 12.5a3 3 0 0 1 0-4l1.5-1.5M14.5 11.5a3 3 0 0 1 0 4L13 17"/><line x1="4" y1="20" x2="20" y2="4"/></svg></div>
+        <div class="bhead"><h3>No dependency</h3><span class="chev">+</span></div>
+        <p>Zero melatonin. Nothing your body learns to rely on.</p>
+        <div class="bmore"><p>Melatonin is a hormone your body can start making less of when you supplement it. DUSK uses only nutrients and botanicals your body already works with — so it stays effective without building tolerance.</p></div>
+      </div>
+      <div class="bcard reveal" onclick="this.classList.toggle('open')">
+        <div class="bi"><svg viewBox="0 0 24 24"><path d="M5 10h11v5a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4Z"/><path d="M16 11h2a2 2 0 0 1 0 4h-2"/><path d="M8.5 6c0-1.2 1-1.2 1-2.5M12 6c0-1.2 1-1.2 1-2.5"/></svg></div>
+        <div class="bhead"><h3>A ritual you crave</h3><span class="chev">+</span></div>
+        <p>A warm, cozy cup replaces the doomscroll as your off-switch.</p>
+        <div class="bmore"><p>The warmth and routine become a cue your brain learns to associate with sleep. It's the good kind of habit — a nightly signal that the day is done and it's time to wind down.</p></div>
+      </div>
     </div>
   </div>
 </section>
@@ -417,6 +488,10 @@
     const D=Math.floor(d/864e5),H=Math.floor(d%864e5/36e5),M=Math.floor(d%36e5/6e4),S=Math.floor(d%6e4/1e3);
     document.getElementById('cd').textContent=(D>0?D+'d ':'')+String(H).padStart(2,'0')+':'+String(M).padStart(2,'0')+':'+String(S).padStart(2,'0');}
   tick();setInterval(tick,1000);
+
+  // subtle parallax on hero tin + badge
+  const tin=document.querySelector('.hero-img img'), badge=document.querySelector('.hero-badge');
+  window.addEventListener('scroll',()=>{const y=window.scrollY;if(y<800){if(tin)tin.style.transform='translateY('+(y*0.05)+'px)';if(badge)badge.style.transform='translateY('+(y*-0.04)+'px)';}},{passive:true});
 </script>
 </body>
 </html>
