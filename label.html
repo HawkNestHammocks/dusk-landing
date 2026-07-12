@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#3a3a3a}
+  :root{--navy:#171d3d;--ink:#20264a;--cream:#f4ecd7;--cream2:#efe6cd;--amber:#c98a34;--amber2:#e0a94e;--muted:#5c6088}
+  .board{display:flex;gap:0;width:1720px;background:#3a3a3a}
+
+  /* ===== FRONT PANEL ===== */
+  .front{width:820px;height:1180px;background:linear-gradient(175deg,#f6efdc,#eadfc2);color:var(--ink);
+    padding:56px 54px;position:relative;font-family:'Inter',sans-serif;border-right:2px dashed rgba(0,0,0,.18)}
+  .front::before{content:"";position:absolute;inset:22px;border:1.5px solid var(--amber);opacity:.45;border-radius:6px;pointer-events:none}
+
+  /* SEAL LOGO */
+  .seal{width:220px;height:220px;margin:6px auto 22px;position:relative}
+  .seal svg{width:100%;height:100%}
+  .ring-text{font-family:'Oswald';font-size:19px;letter-spacing:5px;fill:var(--navy)}
+
+  .brandline{text-align:center}
+  .brand{font-family:'Fraunces';font-size:118px;font-weight:600;letter-spacing:2px;line-height:.9;color:var(--navy)}
+  .desc{font-family:'Oswald';font-weight:600;font-size:30px;letter-spacing:7px;color:var(--amber);margin-top:10px;text-transform:uppercase}
+  .subdesc{font-family:'Inter';font-size:19px;letter-spacing:1px;color:var(--muted);margin-top:12px;font-weight:500}
+
+  .rule{height:2px;background:linear-gradient(90deg,transparent,var(--amber),transparent);margin:26px 0}
+
+  .benefits{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:24px}
+  .benefit{border:1.5px solid var(--navy);border-radius:40px;padding:9px 18px;font-size:15px;font-weight:600;letter-spacing:.5px;color:var(--navy)}
+  .benefit.fill{background:var(--navy);color:var(--cream)}
+
+  .actives{margin:4px 0 22px}
+  .actives .h{font-family:'Oswald';font-size:16px;letter-spacing:3px;color:var(--muted);text-align:center;margin-bottom:14px}
+  .arow{display:flex;justify-content:space-between;align-items:baseline;padding:7px 8px;border-bottom:1px dotted rgba(32,38,74,.28);font-size:19px}
+  .arow b{font-weight:600;color:var(--navy)}
+  .arow .mg{font-family:'Oswald';font-weight:600;color:var(--amber);font-size:18px}
+
+  .dir{text-align:center;font-size:17px;line-height:1.5;color:var(--ink);margin-top:20px;padding:0 10px}
+  .dir b{color:var(--navy)}
+
+  .netwt{position:absolute;bottom:44px;left:0;right:0;text-align:center;font-family:'Oswald';font-size:22px;letter-spacing:3px;color:var(--navy)}
+  .netwt span{color:var(--amber)}
+
+  /* ===== INFO / FACTS PANEL ===== */
+  .info{width:900px;height:1180px;background:var(--navy);color:var(--cream);padding:52px 50px;font-family:'Inter',sans-serif;position:relative}
+  .info h2{font-family:'Fraunces';font-size:46px;font-weight:600;margin-bottom:6px;color:var(--cream)}
+  .info .tag{font-family:'Oswald';letter-spacing:4px;font-size:16px;color:var(--amber2);margin-bottom:26px}
+  .story{font-size:18px;line-height:1.6;color:#cfd0e0;margin-bottom:26px}
+  .story .amber{color:var(--amber2);font-weight:600}
+
+  .facts{background:var(--cream);color:#111;border:3px solid #111;border-radius:4px;padding:18px 20px;width:420px;float:right;margin:0 0 20px 26px;font-family:'Inter'}
+  .facts .ft{font-family:'Fraunces';font-weight:700;font-size:34px;border-bottom:10px solid #111;padding-bottom:2px;line-height:1}
+  .facts .sv{display:flex;justify-content:space-between;font-size:13px;border-bottom:1px solid #111;padding:4px 0}
+  .facts .sv b{font-weight:600}
+  .facts .hdr{display:flex;justify-content:flex-end;font-size:12px;font-weight:700;border-bottom:6px solid #111;padding:3px 0}
+  .facts .fr{display:flex;justify-content:space-between;font-size:14px;border-bottom:1px solid #111;padding:6px 0}
+  .facts .fr .nm b{font-weight:600}
+  .facts .fr .nm span{font-weight:400}
+  .facts .foot{font-size:11px;color:#333;margin-top:8px;line-height:1.4}
+
+  .whyul{list-style:none;clear:none}
+  .whyul li{position:relative;padding:10px 0 10px 34px;font-size:17px;color:#dfe0ee;border-bottom:1px solid rgba(255,255,255,.08)}
+  .whyul li::before{content:"☾";position:absolute;left:2px;color:var(--amber2);font-size:18px}
+  .whyul li b{color:var(--cream)}
+
+  .barcode{position:absolute;bottom:40px;left:50px;display:flex;align-items:flex-end;gap:2px;height:56px}
+  .barcode i{display:block;width:3px;background:var(--cream);height:100%}
+  .made{position:absolute;bottom:44px;right:50px;text-align:right;font-size:12px;color:#9a9cc0;line-height:1.5}
+  .made b{color:var(--cream);font-family:'Oswald';letter-spacing:1px}
+</style>
+</head>
+<body>
+<div class="board">
+
+  <!-- FRONT -->
+  <div class="front">
+    <div class="seal">
+      <svg viewBox="0 0 220 220">
+        <defs><path id="rt" d="M110,110 m-86,0 a86,86 0 1,1 172,0 a86,86 0 1,1 -172,0"/></defs>
+        <circle cx="110" cy="110" r="104" fill="none" stroke="#171d3d" stroke-width="2"/>
+        <circle cx="110" cy="110" r="88" fill="none" stroke="#c98a34" stroke-width="1.5"/>
+        <text class="ring-text"><textPath href="#rt" startOffset="0%">NIGHTLY WIND·DOWN RITUAL · EST. 2026 · </textPath></text>
+        <!-- crescent + star + rays -->
+        <g transform="translate(110,112)">
+          <g stroke="#c98a34" stroke-width="2" opacity=".8">
+            <line x1="0" y1="-60" x2="0" y2="-50"/><line x1="42" y1="-42" x2="35" y2="-35"/>
+            <line x1="60" y1="0" x2="50" y2="0"/><line x1="-42" y1="-42" x2="-35" y2="-35"/>
+            <line x1="-60" y1="0" x2="-50" y2="0"/>
+          </g>
+          <path d="M 20,-34 a 40,40 0 1,0 0,68 a 30,30 0 1,1 0,-68 Z" fill="#171d3d"/>
+          <path d="M28 -6 l2.5 7 7.5 .3 -6 4.7 2.2 7.3 -6.2 -4.3 -6.2 4.3 2.2 -7.3 -6 -4.7 7.5 -.3 Z" fill="#c98a34"/>
+        </g>
+      </svg>
+    </div>
+    <div class="brandline">
+      <div class="brand">DUSK</div>
+      <div class="desc">Wind-Down Cocoa</div>
+      <div class="subdesc">A warm nightly ritual for deeper sleep</div>
+    </div>
+    <div class="rule"></div>
+    <div class="benefits">
+      <span class="benefit fill">MELATONIN-FREE</span>
+      <span class="benefit fill">CAFFEINE-FREE</span>
+      <span class="benefit">VEGAN</span>
+    </div>
+    <div class="actives">
+      <div class="h">— CLINICALLY-DOSED ACTIVES PER SERVING —</div>
+      <div class="arow"><b>Magnesium Glycinate</b><span class="mg">300 mg</span></div>
+      <div class="arow"><b>L-Theanine</b><span class="mg">200 mg</span></div>
+      <div class="arow"><b>Glycine</b><span class="mg">3 g</span></div>
+      <div class="arow"><b>Ashwagandha (KSM-66®)</b><span class="mg">300 mg</span></div>
+      <div class="arow"><b>Apigenin (from chamomile)</b><span class="mg">50 mg</span></div>
+    </div>
+    <div class="dir">Stir one scoop into 8 oz of <b>warm or cold milk</b><br>30 minutes before bed. Breathe. Unplug.</div>
+    <div class="netwt">NET WT 240 g (8.5 OZ) · <span>30 SERVINGS</span></div>
+  </div>
+
+  <!-- INFO -->
+  <div class="info">
+    <h2>The evening ritual.</h2>
+    <div class="tag">MADE FOR THE HOUR YOU SLOW DOWN</div>
+
+    <div class="facts">
+      <div class="ft">Supplement Facts</div>
+      <div class="sv"><span>Serving Size 1 Scoop (8 g)</span></div>
+      <div class="sv"><b>Servings Per Container 30</b></div>
+      <div class="hdr">Amount Per Serving</div>
+      <div class="fr"><span class="nm"><b>Magnesium</b> <span>(as glycinate)</span></span><b>300 mg</b></div>
+      <div class="fr"><span class="nm"><b>L-Theanine</b></span><b>200 mg</b></div>
+      <div class="fr"><span class="nm"><b>Glycine</b></span><b>3 g</b></div>
+      <div class="fr"><span class="nm"><b>Ashwagandha</b> <span>(KSM-66®)</span></span><b>300 mg</b></div>
+      <div class="fr"><span class="nm"><b>Apigenin</b> <span>(chamomile ext.)</span></span><b>50 mg</b></div>
+      <div class="fr"><span class="nm"><b>Reishi</b> <span>(fruiting body)</span></span><b>500 mg</b></div>
+      <div class="foot">Other ingredients: Carob powder, coconut milk powder, cacao-free cocoa flavor, monk fruit, Himalayan salt, cinnamon.</div>
+    </div>
+
+    <div class="story">Your mornings have coffee. Your nights deserve <span class="amber">DUSK</span> — a warm, caffeine-free cocoa built on carob (never cacao, which hides sleep-wrecking theobromine) and clinically-dosed calming actives.</div>
+
+    <ul class="whyul">
+      <li><b>No melatonin.</b> Nothing for your body to grow reliant on.</li>
+      <li><b>No grogginess.</b> Wake up clear, not hungover.</li>
+      <li><b>A ritual, not a pill.</b> The warm mug is the off-switch.</li>
+      <li><b>Third-party tested.</b> Every batch, for purity &amp; potency.</li>
+    </ul>
+
+    <div class="barcode">
+      <i style="height:100%"></i><i style="height:70%"></i><i style="height:100%"></i><i style="height:40%"></i><i style="height:90%"></i><i style="height:100%"></i><i style="height:55%"></i><i style="height:100%"></i><i style="height:80%"></i><i style="height:100%"></i><i style="height:45%"></i><i style="height:95%"></i><i style="height:100%"></i><i style="height:65%"></i><i style="height:100%"></i><i style="height:100%"></i><i style="height:50%"></i><i style="height:85%"></i>
+    </div>
+    <div class="made"><b>DUSK SUPPLY CO.</b><br>Distributed in the USA<br>dusk.co</div>
+  </div>
+
+</div>
+</body>
+</html>
