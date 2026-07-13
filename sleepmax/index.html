@@ -293,8 +293,8 @@
 <section class="blk offer" id="offer">
   <div class="wrap">
     <div class="center reveal" style="margin-bottom:30px">
-      <h2>Join the <span class="lime">founding drop.</span></h2>
-      <p>First 500 tins. 30% off, locked forever. Help us pick the next flavour.</p>
+      <h2>Get the <span class="lime">founding drop.</span></h2>
+      <p>First 500 tins. 30% off, locked forever. When they're gone, they're gone.</p>
     </div>
     <div class="price-card reveal">
       <div class="ribbon">🌙 FOUNDING DROP · 30% OFF THE FIRST 500 TINS</div>
@@ -305,15 +305,16 @@
       <div class="strike" id="strike">$59.00</div>
       <div class="price">$<span id="priceNum">30</span><small id="priceUnit">.80 / mo</small></div>
       <div class="per" id="perNight">~$1.03 a night to fix your whole day</div>
-      <form class="form" onsubmit="reserve(event,this)">
+      <button class="btn" style="width:100%;font-size:17px" onclick="buy()">MAX MY SLEEP →</button>
+      <form class="form" id="fallbackForm" style="display:none" onsubmit="reserve(event,this)">
         <input type="email" placeholder="you@email.com" required>
-        <button class="btn" type="submit">MAX MY SLEEP →</button>
+        <button class="btn" type="submit">NOTIFY ME →</button>
       </form>
-      <div class="preorder">Founding pre-order · ships ~Sept 2026 · <b>full refund anytime before it ships</b></div>
-      <div id="thanks" style="display:none;color:var(--cyan);font-size:14px;margin:8px 0">You're in. Founding-member link hits your inbox the moment we ship. 😴⚡</div>
+      <div class="preorder" style="margin-top:12px">🔒 Secure checkout via Stripe · <b>free shipping</b></div>
+      <div id="thanks" style="display:none;color:var(--cyan);font-size:14px;margin:8px 0">Checkout opens shortly — we'll email your order link within the hour. 😴⚡</div>
       <div class="founder" id="founderLine"><b>Save 25%</b> vs one-time · free shipping · cancel anytime</div>
       <div class="guarantee">💤 30-night guarantee — sleep better or your money back</div>
-      <div class="seats">Only <span id="seats">137</span> founding spots left</div>
+      <div class="seats">Only <span id="seats">137</span> tins left in the drop</div>
     </div>
   </div>
 </section>
@@ -340,14 +341,20 @@
 </footer>
 
 <script>
-  // Stripe: paste the Payment Link URL here to switch the CTA from email-capture to real checkout
-  const STRIPE_LINK="";
-  function reserve(e,f){e.preventDefault(); if(STRIPE_LINK){window.location.href=STRIPE_LINK; return;} f.querySelector('input').value=''; document.getElementById('thanks').style.display='block';}
+  // Stripe Payment Links — paste both; buy() routes by the selected plan
+  const STRIPE_LINK_ONE="";   // one-time $41.30
+  const STRIPE_LINK_SUB="";   // subscription $30.80/mo
+  let plan='sub';
+  function buy(){const url = plan==='sub'?STRIPE_LINK_SUB:STRIPE_LINK_ONE;
+    if(url){window.location.href=url; return;}
+    const f=document.getElementById('fallbackForm'); f.style.display='flex'; f.querySelector('input').focus();}
+  function reserve(e,f){e.preventDefault(); f.querySelector('input').value=''; document.getElementById('thanks').style.display='block';}
 
   const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.2});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
   function setPlan(p){
+    plan=p;
     const sub=p==='sub';
     document.getElementById('tSub').classList.toggle('on',sub);
     document.getElementById('tOne').classList.toggle('on',!sub);
