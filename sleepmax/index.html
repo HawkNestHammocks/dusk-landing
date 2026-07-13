@@ -342,8 +342,8 @@
 
 <script>
   // Stripe Payment Links — paste both; buy() routes by the selected plan
-  const STRIPE_LINK_ONE="";   // one-time $41.30
-  const STRIPE_LINK_SUB="";   // subscription $30.80/mo
+  const STRIPE_LINK_ONE="https://buy.stripe.com/9B66oJbfNbsh7iecDv1Fe00";   // one-time $41.30
+  const STRIPE_LINK_SUB="https://buy.stripe.com/bJe3cxdnVaod9qm9rj1Fe03";   // subscription $30.80/mo
   let plan='sub';
   function buy(){const url = plan==='sub'?STRIPE_LINK_SUB:STRIPE_LINK_ONE;
     if(url){window.location.href=url; return;}
