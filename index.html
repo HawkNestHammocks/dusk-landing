@@ -437,7 +437,7 @@
         <input type="email" placeholder="you@email.com" required>
         <button class="btn" type="submit">Notify me →</button>
       </form>
-      <div class="preorder" style="margin-top:12px">🔒 Secure checkout via Stripe · <b>free shipping</b></div>
+      <div class="preorder" style="margin-top:12px">🔒 Secure checkout via Stripe · <b>free shipping</b> · <b>all taxes included</b></div>
       <div id="thanks" style="display:none;color:var(--gold);font-size:14px;margin:8px 0">Checkout is opening shortly — we'll email you your order link within the hour. ☾</div>
       <div class="founder" id="founderLine"><b>Save 25%</b> vs one-time · free shipping · cancel anytime</div>
       <div class="guarantee">🌙 30-night sleep-better guarantee — or your money back</div>
@@ -498,7 +498,7 @@
     document.getElementById('priceNum').textContent= sub?'30':'41';
     document.getElementById('priceUnit').textContent= sub?'.80 / mo':'.30 one-time';
     document.getElementById('perNight').textContent= sub?'just ~$1.03 a night · 30 nights':'~$1.38 a night · 30 nights';
-    document.getElementById('founderLine').innerHTML= sub?'<b>Save 25%</b> vs one-time · free shipping · cancel anytime':'One tin · 30 nights · <b>30% founding discount applied</b>';
+    document.getElementById('founderLine').innerHTML= sub?'<b>Save 25%</b> vs one-time · free shipping · cancel anytime':'One tin · 30 nights · free shipping · <b>30% founding discount applied</b>';
   }
 
   // countdown to a fixed founding deadline
