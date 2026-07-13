@@ -34,7 +34,12 @@
   .nav-in{display:flex;align-items:center;justify-content:space-between;height:62px}
   .brand{font-family:var(--anton);font-size:22px;letter-spacing:1px}
   .brand span{color:var(--cyan)}
-  .nav-cta{font-size:14px;background:var(--cyan);color:var(--ink);padding:10px 20px;border-radius:10px;font-weight:700;box-shadow:3px 3px 0 rgba(0,0,0,.3)}
+  .nav-cta{font-size:14px;background:var(--cyan);color:var(--ink);padding:10px 20px;border-radius:10px;font-weight:700;box-shadow:3px 3px 0 rgba(0,0,0,.3);white-space:nowrap;flex:0 0 auto}
+  @media(max-width:600px){
+    nav .brand{font-size:18px}
+    .nav-in{height:54px}
+    .nav-cta{font-size:12px;padding:8px 14px}
+  }
 
   .hero{position:relative;background:var(--grad);padding:64px 0 70px;overflow:hidden}
   .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
@@ -185,7 +190,7 @@
       <div class="hero-note">⚡ full clinical doses · saffron + magnesium + L-theanine + glycine + ashwagandha</div>
     </div>
     <div class="hero-img reveal in">
-      <img src="../images/sleepmaxing-c-hero.png" alt="SLEEP MAXING nightly sleep drink tin with chocolate milk">
+      <img src="../images/sleepmaxing-c-hero2.png" alt="SLEEP MAXING nightly sleep drink tin with a warm mug of chocolate milk">
     </div>
   </div>
 </header>
