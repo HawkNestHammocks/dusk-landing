@@ -174,6 +174,15 @@
   .seats{font-size:13px;color:var(--rose);margin-top:8px;font-weight:600}
   @media(max-width:520px){.form{flex-direction:column}}
 
+  /* BATCH COUNTER */
+  .batchbox{background:rgba(13,18,48,.65);border:1px solid var(--line);border-radius:14px;padding:16px 18px 14px;margin:4px 0 18px;text-align:left}
+  .bb-top{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--osw);font-size:12.5px;letter-spacing:2px;color:var(--cream-dim);text-transform:uppercase}
+  .bb-top .bb-left{color:var(--rose);font-weight:600}
+  .bb-bar{height:10px;background:rgba(255,255,255,.1);border-radius:20px;margin:10px 0 8px;overflow:hidden}
+  .bb-fill{height:100%;width:0;border-radius:20px;background:linear-gradient(90deg,var(--gold),#c9982f);transition:width 1.4s cubic-bezier(.2,.8,.2,1)}
+  .bb-note{font-size:12.5px;color:var(--cream-dim)}
+  .bb-note b{color:var(--gold)}
+
   /* FAQ */
   .faq details{border-bottom:1px solid rgba(255,255,255,.09);padding:20px 0;max-width:780px;margin:0 auto}
   .faq summary{font-family:var(--serif);font-size:19px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
@@ -458,16 +467,21 @@
       <div class="strike" id="strike">$59.00</div>
       <div class="price">$<span id="priceNum">30</span><small id="priceUnit">.80 / mo</small></div>
       <div class="per" id="perNight">just ~$1.03 a night · 30 nights</div>
+      <div class="batchbox">
+        <div class="bb-top"><span>☾ Founding Batch №1 — 500 tins</span><span class="bb-left">37 left</span></div>
+        <div class="bb-bar"><div class="bb-fill" id="bbFill" data-w="92.6"></div></div>
+        <div class="bb-note"><b>463 of 500 reserved</b> — this batch is nearly sold out</div>
+      </div>
       <button class="btn" style="width:100%;font-size:17px" onclick="buy()">Buy MOONSET →</button>
       <form class="form" id="fallbackForm" style="display:none" onsubmit="reserve(event,this)">
         <input type="email" placeholder="you@email.com" required>
         <button class="btn" type="submit">Notify me →</button>
       </form>
-      <div class="preorder" style="margin-top:12px">🔒 Secure checkout via Stripe · <b>free shipping</b> · <b>all taxes included</b></div>
+      <div class="preorder" style="margin-top:12px">🔒 Secure checkout via Stripe · <b>free US shipping</b> · <b>all taxes included</b></div>
       <div id="thanks" style="display:none;color:var(--gold);font-size:14px;margin:8px 0">Checkout is opening shortly — we'll email you your order link within the hour. ☾</div>
-      <div class="founder" id="founderLine"><b>Save 25%</b> vs one-time · free shipping · cancel anytime</div>
+      <div class="founder" id="founderLine"><b>Save 25%</b> vs one-time · free US shipping · cancel anytime</div>
       <div class="guarantee">🌙 30-night sleep-better guarantee — or your money back</div>
-      <div class="seats">Only <span id="seats">137</span> tins left in the launch batch</div>
+      <div class="seats">Only <span id="seats">37</span> tins left in Batch №1</div>
     </div>
   </div>
 </section>
@@ -481,6 +495,7 @@
     <details><summary>Will it knock me out?</summary><p>No — and that's the point. It doesn't sedate you; it lowers the noise so your body can do what it already knows how to do. You ease into sleep and wake clear, not foggy.</p></details>
     <details><summary>When and how do I take it?</summary><p>Stir one scoop into 8oz of warm or cold milk (dairy or plant) about 30 minutes before bed.</p></details>
     <details><summary>What does it taste like?</summary><p>A rich, lightly-spiced cocoa — a cozy, grown-up hot chocolate. Naturally sweetened with monk fruit, no added sugar.</p></details>
+    <details><summary>Do you ship outside the US?</summary><p>The founding batch ships to US addresses only (free shipping, all 50 states). Canadian launch is coming — join the list and we'll email you the moment it opens.</p></details>
     <details><summary>Can I cancel my subscription?</summary><p>Anytime, in one click. Founding-member pricing stays with you as long as you're subscribed, and every order is covered by our 30-night guarantee.</p></details>
   </div>
 </section>
@@ -524,8 +539,13 @@
     document.getElementById('priceNum').textContent= sub?'30':'41';
     document.getElementById('priceUnit').textContent= sub?'.80 / mo':'.30 one-time';
     document.getElementById('perNight').textContent= sub?'just ~$1.03 a night · 30 nights':'~$1.38 a night · 30 nights';
-    document.getElementById('founderLine').innerHTML= sub?'<b>Save 25%</b> vs one-time · free shipping · cancel anytime':'One tin · 30 nights · free shipping · <b>30% founding discount applied</b>';
+    document.getElementById('founderLine').innerHTML= sub?'<b>Save 25%</b> vs one-time · free US shipping · cancel anytime':'One tin · 30 nights · free US shipping · <b>30% founding discount applied</b>';
   }
+
+  // batch bar fill on view
+  const bbf=document.getElementById('bbFill');
+  if(bbf){const bio=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){bbf.style.width=bbf.dataset.w+'%';bio.disconnect();}})},{threshold:.4});
+    bio.observe(bbf); setTimeout(()=>{bbf.style.width=bbf.dataset.w+'%';},4000);}
 
   // countdown to a fixed founding deadline
   const deadline=new Date('2026-07-20T23:59:59').getTime();

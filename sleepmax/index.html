@@ -189,6 +189,14 @@
   .seats{font-size:14px;color:var(--rose);margin-top:8px;font-weight:700}
   @media(max-width:520px){.form{flex-direction:column}}
 
+  .batchbox{background:rgba(10,11,40,.8);border:2px solid rgba(255,158,207,.4);border-radius:16px;padding:16px 18px 14px;margin:4px 0 18px;text-align:left}
+  .bb-top{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--anton);font-size:14px;letter-spacing:1.5px;color:#e9e2ff;text-transform:uppercase}
+  .bb-top .bb-left{color:var(--rose)}
+  .bb-bar{height:12px;background:rgba(255,255,255,.12);border-radius:20px;margin:10px 0 8px;overflow:hidden}
+  .bb-fill{height:100%;width:0;border-radius:20px;background:linear-gradient(90deg,var(--cyan),var(--rose));box-shadow:0 0 12px rgba(125,232,255,.5);transition:width 1.4s cubic-bezier(.2,.8,.2,1)}
+  .bb-note{font-size:13px;color:#cfc7ee;font-weight:600}
+  .bb-note b{color:var(--sun)}
+
   .faq details{border-bottom:2px solid rgba(125,232,255,.15);padding:18px 0;max-width:760px;margin:0 auto}
   .faq summary{font-weight:700;font-size:18px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
   .faq summary::-webkit-details-marker{display:none}
@@ -416,16 +424,21 @@
       <div class="strike" id="strike">$59.00</div>
       <div class="price">$<span id="priceNum">30</span><small id="priceUnit">.80 / mo</small></div>
       <div class="per" id="perNight">~$1.03 a night to fix your whole day</div>
+      <div class="batchbox">
+        <div class="bb-top"><span>😴 Founding Drop — 500 tins</span><span class="bb-left">37 LEFT</span></div>
+        <div class="bb-bar"><div class="bb-fill" id="bbFill" data-w="92.6"></div></div>
+        <div class="bb-note"><b>463 of 500 claimed</b> — when it's gone, it's gone</div>
+      </div>
       <button class="btn" style="width:100%;font-size:17px" onclick="buy()">MAX MY SLEEP →</button>
       <form class="form" id="fallbackForm" style="display:none" onsubmit="reserve(event,this)">
         <input type="email" placeholder="you@email.com" required>
         <button class="btn" type="submit">NOTIFY ME →</button>
       </form>
-      <div class="preorder" style="margin-top:12px">🔒 Secure checkout via Stripe · <b>free shipping</b> · <b>all taxes included</b></div>
+      <div class="preorder" style="margin-top:12px">🔒 Secure checkout via Stripe · <b>free US shipping</b> · <b>all taxes included</b></div>
       <div id="thanks" style="display:none;color:var(--cyan);font-size:14px;margin:8px 0">Checkout opens shortly — we'll email your order link within the hour. 😴⚡</div>
-      <div class="founder" id="founderLine"><b>Save 25%</b> vs one-time · free shipping · cancel anytime</div>
+      <div class="founder" id="founderLine"><b>Save 25%</b> vs one-time · free US shipping · cancel anytime</div>
       <div class="guarantee">💤 30-night guarantee — sleep better or your money back</div>
-      <div class="seats">Only <span id="seats">137</span> tins left in the drop</div>
+      <div class="seats">Only <span id="seats">37</span> tins left in the drop</div>
     </div>
   </div>
 </section>
@@ -439,6 +452,7 @@
     <details><summary>Doesn't chocolate have caffeine?</summary><p>Cacao does — that's why hot chocolate can keep you up. We use carob: tastes like chocolate, contains literally zero caffeine and zero theobromine.</p></details>
     <details><summary>Will it knock me out?</summary><p>No. It's not a sedative — it turns the noise down so your body does what it already knows how to do. You fall asleep easier and wake up clear, not drugged.</p></details>
     <details><summary>How do I take it?</summary><p>One scoop, warm milk (any kind), ~30 minutes before bed. That's the entire tutorial.</p></details>
+    <details><summary>Do you ship outside the US?</summary><p>Founding drop is US-only (free shipping, all 50 states). Canada next — get on the list and you'll know first.</p></details>
     <details><summary>Can I cancel the subscription?</summary><p>Anytime, one click, zero guilt trip. Founding pricing stays as long as you're subscribed.</p></details>
   </div>
 </section>
@@ -513,8 +527,12 @@
     document.getElementById('priceNum').textContent= sub?'30':'41';
     document.getElementById('priceUnit').textContent= sub?'.80 / mo':'.30 one-time';
     document.getElementById('perNight').textContent= sub?'~$1.03 a night to fix your whole day':'~$1.38 a night · 30 nights';
-    document.getElementById('founderLine').innerHTML= sub?'<b>Save 25%</b> vs one-time · free shipping · cancel anytime':'One tin · 30 nights · free shipping · <b>30% founding discount applied</b>';
+    document.getElementById('founderLine').innerHTML= sub?'<b>Save 25%</b> vs one-time · free US shipping · cancel anytime':'One tin · 30 nights · free US shipping · <b>30% founding discount applied</b>';
   }
+
+  const bbf=document.getElementById('bbFill');
+  if(bbf){const bio=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){bbf.style.width=bbf.dataset.w+'%';bio.disconnect();}})},{threshold:.4});
+    bio.observe(bbf); setTimeout(()=>{bbf.style.width=bbf.dataset.w+'%';},4000);}
 
   const deadline=new Date('2026-07-20T23:59:59').getTime();
   function tick(){const d=deadline-Date.now();if(d<0){document.getElementById('cd').textContent='ending soon';return;}
