@@ -30,8 +30,10 @@ fbq('track','PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2116786382572169&ev=PageView&noscript=1"/></noscript>
 <script>
-var _plan=new URLSearchParams(window.location.search).get('plan');
-fbq('track','Purchase',{content_name:'SLEEP MAXING',content_type:'product',value:_plan==='sub'?30.80:41.30,currency:'USD'});
+var _q=new URLSearchParams(window.location.search);
+var _plan=_q.get('plan'), _sid=_q.get('sid');
+var _pd={content_name:'SLEEP MAXING',content_type:'product',value:_plan==='sub'?30.80:41.30,currency:'USD'};
+if(_sid){fbq('track','Purchase',_pd,{eventID:_sid});}else{fbq('track','Purchase',_pd);}
 </script>
 </head>
 <body>
