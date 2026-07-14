@@ -214,6 +214,14 @@
   .tg .reveal:nth-child(5){transition-delay:.32s}
   .tg .reveal:nth-child(6){transition-delay:.4s}
 </style>
+<meta name="facebook-domain-verification" content="9dissuut8llzicqp4djb5415gaeu03" />
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','2116786382572169');
+fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2116786382572169&ev=PageView&noscript=1"/></noscript>
+<script>fbq('track','ViewContent',{content_name:'SLEEP MAXING',content_type:'product'});</script>
 </head>
 <body>
 
@@ -472,9 +480,10 @@
   const STRIPE_LINK_SUB="https://buy.stripe.com/bJe3cxdnVaod9qm9rj1Fe03";   // subscription $30.80/mo
   let plan='sub';
   function buy(){const url = plan==='sub'?STRIPE_LINK_SUB:STRIPE_LINK_ONE;
+    if(typeof fbq==='function') fbq('track','InitiateCheckout',{content_name:'SLEEP MAXING',value:plan==='sub'?30.80:41.30,currency:'USD'});
     if(url){window.location.href=url; return;}
     const f=document.getElementById('fallbackForm'); f.style.display='flex'; f.querySelector('input').focus();}
-  function reserve(e,f){e.preventDefault(); f.querySelector('input').value=''; document.getElementById('thanks').style.display='block';}
+  function reserve(e,f){e.preventDefault(); if(typeof fbq==='function') fbq('track','Lead'); f.querySelector('input').value=''; document.getElementById('thanks').style.display='block';}
 
   const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.2});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
