@@ -100,6 +100,8 @@
   .cdot.on{background:var(--cyan);transform:scale(1.25)}
   .carhint{margin-top:12px;font-size:13.5px;color:#e6d9ff;font-weight:600}
   .carhint b{color:var(--cyan)}
+  .certs{position:absolute;bottom:44px;right:10px;display:flex;flex-direction:column;gap:7px;align-items:flex-end;z-index:5}
+  .cert{background:rgba(14,16,51,.85);border:1.5px solid var(--cyan);color:var(--cyan);font-size:10.5px;font-weight:800;letter-spacing:1.6px;padding:6px 13px;border-radius:100px}
   @media(max-width:840px){.hero-grid{grid-template-columns:1fr;gap:26px}.hero-img{order:-1}}
 
   .trust{background:var(--ink);border-bottom:2px solid rgba(125,232,255,.2);padding:16px 0}
@@ -249,6 +251,11 @@
         <button class="cnav prev" onclick="carGo(-1)" aria-label="Previous image">‹</button>
         <button class="cnav next" onclick="carGo(1)" aria-label="Next image">›</button>
         <div class="cdots" id="cdots"></div>
+        <div class="certs">
+          <span class="cert">cGMP FACILITY</span>
+          <span class="cert">3RD-PARTY TESTED</span>
+          <span class="cert">VEGAN · NON-GMO</span>
+        </div>
       </div>
       <div class="carhint">swipe → see the <b>full nutrition label</b></div>
     </div>

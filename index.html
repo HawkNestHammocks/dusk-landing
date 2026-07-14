@@ -58,7 +58,19 @@
   .cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
   .hero-note{font-size:13px;color:var(--cream-dim);margin-top:16px;display:flex;align-items:center;gap:8px}
   .hero-img{position:relative;text-align:center}
-  .hero-img img{width:100%;max-width:440px;border-radius:20px;filter:drop-shadow(0 40px 70px rgba(0,0,0,.55))}
+  .carousel{position:relative;max-width:440px;margin:0 auto;border-radius:20px;overflow:hidden;filter:drop-shadow(0 40px 70px rgba(0,0,0,.55))}
+  .cslides{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .cslides::-webkit-scrollbar{display:none}
+  .cslides img{flex:0 0 100%;width:100%;scroll-snap-align:center;display:block}
+  .cnav{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:rgba(13,18,48,.78);color:var(--gold);font-size:24px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;padding-bottom:3px;z-index:4}
+  .cnav.prev{left:10px}.cnav.next{right:10px}
+  .cdots{position:absolute;bottom:12px;left:0;right:0;display:flex;justify-content:center;gap:8px;z-index:4}
+  .cdot{width:9px;height:9px;border-radius:50%;background:rgba(242,237,221,.4);transition:.2s}
+  .cdot.on{background:var(--gold);transform:scale(1.25)}
+  .carhint{margin-top:12px;font-size:13px;color:var(--cream-dim)}
+  .carhint b{color:var(--gold)}
+  .certs{position:absolute;bottom:44px;right:10px;display:flex;flex-direction:column;gap:7px;align-items:flex-end;z-index:5}
+  .cert{background:rgba(13,18,48,.85);border:1px solid var(--gold);color:var(--gold2);font-size:10.5px;font-weight:700;letter-spacing:1.6px;padding:6px 13px;border-radius:100px}
   .hero-badge{position:absolute;bottom:20px;left:8px;background:var(--cream);color:var(--navy);border-radius:14px;padding:11px 15px;font-size:12px;font-weight:700;box-shadow:0 20px 40px -12px rgba(0,0,0,.5);line-height:1.25;text-align:left}
   .hero-badge span{display:block;font-family:var(--serif);font-size:21px;color:var(--navy2)}
   @media(max-width:840px){.hero-grid{grid-template-columns:1fr;gap:26px}.hero-img{order:-1}}
@@ -232,8 +244,22 @@
       <div class="hero-note">☾ &nbsp;Five actives, clinically dosed · saffron · magnesium · L-theanine · glycine · ashwagandha</div>
     </div>
     <div class="hero-img reveal in">
-      <img src="images/moonset-g5-tin3.png" alt="MOONSET natural sleep supplement — navy tin with gold lid">
+      <div class="carousel">
+        <div class="cslides" id="cslides">
+          <img src="images/moonset-g5-tin3.png" alt="MOONSET natural sleep supplement — navy tin with gold lid">
+          <img src="images/moonset-facts.png" alt="MOONSET Supplement Facts — full nutrition label" loading="lazy">
+        </div>
+        <button class="cnav prev" onclick="carGo(-1)" aria-label="Previous image">‹</button>
+        <button class="cnav next" onclick="carGo(1)" aria-label="Next image">›</button>
+        <div class="cdots" id="cdots"></div>
+        <div class="certs">
+          <span class="cert">cGMP FACILITY</span>
+          <span class="cert">3RD-PARTY TESTED</span>
+          <span class="cert">VEGAN · NON-GMO</span>
+        </div>
+      </div>
       <div class="hero-badge">From<span>~$1.30 / night</span></div>
+      <div class="carhint">swipe → see the <b>full supplement facts</b></div>
     </div>
   </div>
 </header>
@@ -508,8 +534,16 @@
     document.getElementById('cd').textContent=(D>0?D+'d ':'')+String(H).padStart(2,'0')+':'+String(M).padStart(2,'0')+':'+String(S).padStart(2,'0');}
   tick();setInterval(tick,1000);
 
+  // hero carousel
+  const csl=document.getElementById('cslides'), cdots=document.getElementById('cdots');
+  const nSlides=csl.children.length;
+  for(let i=0;i<nSlides;i++){const d=document.createElement('span');d.className='cdot'+(i===0?' on':'');cdots.appendChild(d);}
+  function carIdx(){return Math.round(csl.scrollLeft/csl.clientWidth);}
+  function carGo(d){const i=Math.max(0,Math.min(nSlides-1,carIdx()+d));csl.scrollTo({left:i*csl.clientWidth,behavior:'smooth'});}
+  csl.addEventListener('scroll',()=>{const i=carIdx();[...cdots.children].forEach((d,k)=>d.classList.toggle('on',k===i));},{passive:true});
+
   // subtle parallax on hero tin + badge
-  const tin=document.querySelector('.hero-img img'), badge=document.querySelector('.hero-badge');
+  const tin=document.querySelector('.hero-img .carousel'), badge=document.querySelector('.hero-badge');
   window.addEventListener('scroll',()=>{const y=window.scrollY;if(y<800){if(tin)tin.style.transform='translateY('+(y*0.05)+'px)';if(badge)badge.style.transform='translateY('+(y*-0.04)+'px)';}},{passive:true});
 </script>
 </body>
