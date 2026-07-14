@@ -1,0 +1,29 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Jost:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;box-sizing:border-box}
+body{width:1640px;height:624px;position:relative;font-family:Jost,sans-serif;overflow:hidden;background:#0e1033}
+.half{position:absolute;top:0;bottom:0;width:52%;overflow:hidden}
+.half.l{left:0}
+.half.r{right:0}
+.half img{width:100%;height:100%;object-fit:cover;object-position:center 38%}
+.half.l::after,.half.r::after{content:"";position:absolute;inset:0}
+.half.l::after{background:linear-gradient(90deg,rgba(14,16,51,.18),rgba(14,16,51,.78))}
+.half.r::after{background:linear-gradient(270deg,rgba(14,16,51,.18),rgba(14,16,51,.78))}
+.mid{position:absolute;left:50%;top:0;bottom:0;transform:translateX(-50%);width:560px;background:linear-gradient(180deg,#0e1033f2,#101726f8);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 0 80px rgba(0,0,0,.55);z-index:3}
+.moon{width:110px;margin-bottom:16px}
+.brand{font-family:'Cormorant Garamond';font-weight:600;font-size:64px;letter-spacing:8px;color:#f6efdf;line-height:1}
+.subbrand{font-weight:600;font-size:20px;letter-spacing:7px;color:#cbb37e;margin-top:10px}
+.batch{margin-top:26px;background:linear-gradient(90deg,#d9c084,#bb9d5a);color:#1c1608;font-weight:700;font-size:19px;letter-spacing:2.5px;padding:12px 30px;border-radius:100px}
+.tag{margin-top:16px;font-size:16px;letter-spacing:2px;color:#b9bcd6;font-weight:500}
+</style></head><body>
+<div class="half l"><img src="images/moonset-g5-tin3.png"></div>
+<div class="half r"><img src="images/sleepmaxing-c-hero2.png"></div>
+<div class="mid">
+  <svg class="moon" viewBox="0 0 120 120"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#e8cf96"/><stop offset="55%" stop-color="#d9a9c4"/><stop offset="100%" stop-color="#9db8ff"/></linearGradient></defs><path d="M92 26 a44 44 0 1 0 14 34 a34 34 0 1 1 -14 -34Z" fill="url(#g)"/></svg>
+  <div class="brand">MOONSET</div>
+  <div class="subbrand">SUPPLEMENTS</div>
+  <div class="batch">FOUNDING BATCH №1 — OUT NOW</div>
+  <div class="tag">DEEP, NATURAL SLEEP · MELATONIN-FREE</div>
+</div>
+</body></html>
