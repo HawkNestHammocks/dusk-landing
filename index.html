@@ -223,6 +223,32 @@
   .bcard .bmore{max-height:0;overflow:hidden;transition:max-height .35s ease,margin .35s ease,opacity .3s;opacity:0}
   .bcard.open .bmore{max-height:140px;margin-top:12px;opacity:1}
   .bcard .bmore p{font-size:14.5px;color:var(--muted);border-top:1px solid rgba(255,255,255,.08);padding-top:12px}
+  /* HERO OFFER STRIP */
+  .hero-offer{display:flex;align-items:center;gap:16px;margin-top:20px;background:rgba(13,18,48,.72);border:1px solid var(--gold);border-radius:16px;padding:13px 18px;max-width:530px;flex-wrap:wrap}
+  .ho-strike{color:var(--cream-dim);text-decoration:line-through;font-size:15px}
+  .ho-price{font-family:var(--serif);font-size:30px;color:var(--cream);line-height:1}
+  .ho-price small{font-size:15px;color:var(--cream-dim);font-family:var(--sans)}
+  .ho-meta{font-size:12.5px;color:var(--cream-dim);line-height:1.45}
+  .ho-meta b{color:var(--rose)}
+  .hero-offer .btn{margin-left:auto;padding:13px 24px;font-size:15px}
+  @media(max-width:600px){.hero-offer .btn{margin-left:0;width:100%;text-align:center}}
+
+  /* STICKY BUY BAR (mobile) */
+  .buybar{position:fixed;left:0;right:0;bottom:0;z-index:80;background:rgba(13,18,48,.97);backdrop-filter:blur(12px);border-top:1px solid var(--gold);padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:none;align-items:center;justify-content:space-between;gap:12px;transform:translateY(110%);transition:transform .35s ease}
+  .buybar.show{transform:none}
+  .sb-price{font-family:var(--serif);font-size:22px;color:var(--cream);line-height:1.1}
+  .sb-price small{font-size:13px;color:var(--cream-dim);font-family:var(--sans)}
+  .sb-price .sb-strike{font-size:13px;color:var(--cream-dim);text-decoration:line-through;font-family:var(--sans);margin-left:6px}
+  .sb-sub{font-size:11.5px;color:var(--cream-dim)}
+  .sb-sub b{color:var(--rose)}
+  .buybar .btn{padding:13px 24px;font-size:15px;white-space:nowrap;flex:0 0 auto}
+  @media(max-width:840px){.buybar{display:flex}}
+
+  /* QUOTE ABOVE BUY BUTTON */
+  .pc-quote{font-size:13.5px;color:var(--cream-dim);margin:0 0 14px;font-style:italic;line-height:1.5}
+  .pc-quote .stars{font-size:12px;letter-spacing:1.5px;font-style:normal}
+  .pc-quote span{color:var(--muted);font-style:normal}
+
   footer{background:#080c20;padding:46px 0 32px;text-align:center;border-top:1px solid var(--line)}
   footer .brand{justify-content:center;margin-bottom:12px}
   footer p{color:var(--cream-dim);font-size:13px;max-width:580px;margin:0 auto 8px}
@@ -259,6 +285,11 @@ fbq('track','PageView');
         <a href="#science" class="btn btn-ghost">See the science</a>
       </div>
       <div class="hero-note">☾ &nbsp;Five actives, clinically dosed · saffron · magnesium · L-theanine · glycine · ashwagandha</div>
+      <div class="hero-offer reveal in">
+        <div><span class="ho-strike">$59</span><br><span class="ho-price">$30.80<small>/mo</small></span></div>
+        <div class="ho-meta">Founding 30% off · free US shipping · taxes in<br><b>Only 37 of 500 tins left in Batch №1</b></div>
+        <button class="btn" onclick="buy()">Buy Now →</button>
+      </div>
     </div>
     <div class="hero-img reveal in">
       <div class="carousel">
@@ -481,6 +512,7 @@ fbq('track','PageView');
         <div class="bb-bar"><div class="bb-fill" id="bbFill" data-w="92.6"></div></div>
         <div class="bb-note"><b>463 of 500 reserved</b> — this batch is nearly sold out</div>
       </div>
+      <div class="pc-quote"><span class="stars" style="color:var(--gold)">★★★★★</span> "The first thing that actually made my brain go quiet at night." <span>— Marcus T., verified early tester</span></div>
       <button class="btn" style="width:100%;font-size:17px" onclick="buy()">Buy MOONSET →</button>
       <form class="form" id="fallbackForm" style="display:none" onsubmit="reserve(event,this)">
         <input type="email" placeholder="you@email.com" required>
@@ -516,6 +548,14 @@ fbq('track','PageView');
     <p class="disc2">*Statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease. Charts and figures are illustrative of ingredient research and early-tester feedback; individual results vary. Manufactured in the USA in a cGMP facility, with globally sourced ingredients. © 2026 Moonset.</p>
   </div>
 </footer>
+
+<div class="buybar" id="buybar">
+  <div>
+    <div class="sb-price">$30.80<small>/mo</small><span class="sb-strike">$59</span></div>
+    <div class="sb-sub">30% off · free US shipping · <b>37 left</b></div>
+  </div>
+  <button class="btn" onclick="buy()">Buy Now →</button>
+</div>
 
 <script>
   // Stripe Payment Links — paste both; buy() routes by the selected plan
@@ -571,6 +611,17 @@ fbq('track','PageView');
   function carIdx(){return Math.round(csl.scrollLeft/csl.clientWidth);}
   function carGo(d){const i=Math.max(0,Math.min(nSlides-1,carIdx()+d));csl.scrollTo({left:i*csl.clientWidth,behavior:'smooth'});}
   csl.addEventListener('scroll',()=>{const i=carIdx();[...cdots.children].forEach((d,k)=>d.classList.toggle('on',k===i));},{passive:true});
+
+  // sticky buy bar — show after hero, hide while the offer card is on screen
+  const buybar=document.getElementById('buybar'), offerSec=document.getElementById('offer');
+  function buybarTick(){
+    if(!buybar||!offerSec) return;
+    const o=offerSec.getBoundingClientRect();
+    const offerVisible=o.top<window.innerHeight&&o.bottom>0;
+    buybar.classList.toggle('show',window.scrollY>650&&!offerVisible);
+  }
+  window.addEventListener('scroll',buybarTick,{passive:true});
+  buybarTick();
 
   // subtle parallax on hero tin + badge
   const tin=document.querySelector('.hero-img .carousel'), badge=document.querySelector('.hero-badge');
